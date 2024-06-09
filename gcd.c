@@ -3,7 +3,12 @@
 //ユークリッドの互除法で最大公約数を計算
 
 long long gcd(long long a,long long b){
-  long long tmp=1;
+  long long tmp;
+  if(a<b){
+    tmp=a;
+    a=b;
+    b=tmp;
+  }
   while(b!=0){
     tmp=a%b;
     a=b;
@@ -11,6 +16,7 @@ long long gcd(long long a,long long b){
   }
   return a;
 }
+
 
 //テスト
 int main(void){
