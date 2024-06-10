@@ -4,6 +4,9 @@
 
 long long combination(int n,int r){
   long long ans=1;
+  if(n<r||r<0){
+    return 0;
+  }
   if(r>=n/2){
     r=n-r;
   }
