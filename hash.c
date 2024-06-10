@@ -1,7 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<string.h>
-#include<stdbool.h>
 
 //チェイン法によるハッシュ
 
@@ -81,8 +79,8 @@ int adddata(cell *hash_array,long long value){
   return 0;
 }
 
-//テスト 
-//https://atcoder.jp/contests/code-festival-2017-qualb/tasks/code_festival_2017_qualb_bの問題を解くプログラムです
+//テスト (下記URLの問題の解となるプログラムです)
+//https://atcoder.jp/contests/code-festival-2017-qualb/tasks/code_festival_2017_qualb_b
 int main(void){
   cell *h=createhash();
   int n,m;
