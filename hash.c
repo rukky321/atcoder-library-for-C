@@ -11,6 +11,7 @@ typedef struct cell{
   long long value;
   int count;
   struct cell *next;
+  struct cell *prev;
 } cell;
 
 //セルを初期化
@@ -18,6 +19,7 @@ void initcell(cell *c){
   c->value=-1;
   c->count=1;
   c->next=NULL;
+  c->prev=NULL;
 }
 
 // data一つ分の領域を確保
@@ -58,9 +60,8 @@ cell *searchdata(cell *hash_array,long long value){
 }
 
 // add時に既にデータが格納されていた時の操作
-int has_data(cell *c){
+void countup(cell *c){
   c->count++;
-  return -1;
 }
 
 // 新しくデータを格納する
@@ -70,13 +71,30 @@ int adddata(cell *hash_array,long long value){
   int h=hash(value);
   for(c=&hash_array[h];c->next!=NULL;c=c->next){
     if(c->next->value==value){
-      return has_data(c->next);
+        countup(c->next);
+        return -1;
     }
   }
   cell *newcell=createcell();
   newcell->value=value;
   c->next=newcell;
+  newcell->prev=c;
   return 0;
+}
+
+// データを指定して要素を削除
+void deletedata(cell *hash_array,cell *c){
+    if(c->prev!=NULL){
+        if(c->next!=NULL){
+            c->prev->next=c->next;
+            c->next->prev=c->prev;
+            free(c);
+        }
+        else{
+            c->prev->next=c->next=NULL;
+            free(c);
+        }
+    }
 }
 
 //テスト (下記URLの問題の解となるプログラムです)
@@ -102,6 +120,9 @@ int main(void){
     if(c!=NULL){
       if(c->count>0){
         c->count--;
+        if(c->count==0){
+            deletedata(h,c);
+        }
       }
       else{
         printf("NO\n");
