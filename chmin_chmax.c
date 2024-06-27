@@ -1,13 +1,13 @@
 #include<stdio.h>
 
-// a<bとなるように値を入れ替え
+// a>bならaにbを代入
 void chmin(int *a,int *b){
     if(*a>*b){
         *a=*b;
     }
 }
 
-// a>bとなるように値を入れ替え
+// a<bならaにbを代入
 void chmax(int *a,int *b){
     if(*a<*b){
         *a=*b;
