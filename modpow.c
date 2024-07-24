@@ -9,7 +9,8 @@ long long modpow(long long x,long long n,long long mod){
         if((n%2)==1){
             ans*=tmp_x%mod;
         }
-        tmp_x*=tmp_x%mod;
+        tmp_x*=tmp_x;
+        tmp%=mod;
         n/=2;
     }
     return ans;
